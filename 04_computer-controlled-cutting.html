@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Fabrication Course Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main-content">
+            <main>
+                <h1>Assignment 04: Computer-Controlled Cutting</h1>
+                    <video src="Media/04 Computer-Controlled Cutting/laser-cutter.mp4" controls loop muted></video>
+                    <p>This week, I designed a small table made from 3 mm cardboard and cut on the laser cutter. I wanted a simple object that still demonstrated slot‑based joinery, so I created a three‑part structure: two interlocking leg pieces and a tabletop. My inspiration came from a joinery technique where two perpendicular leg frames lock into each other through a central slot, forming a stable x‑shaped support. The leg structures also have tenons in both ends which connect to the table top slots making the structure rigid. Before modeling anything in FreeCAD, I made a simple sketch of the joinery to plan how the parts would align.</p>
+                    <img src="Media/04 Computer-Controlled Cutting/sketch.jpg" alt="">
+                    <p>To make the design parametric, I began by defining some key variables (height, top width, and material thickness) inside FreeCAD’s Spreadsheet workbench. I then drew the leg profile in the Sketcher workbench and constrained most dimensions using the spreadsheet parameters. After creating two clones of the leg, I added the interlocking slots to them: one slot on the top of the first leg and a mirrored slot on the bottom of the second. I continued by drawing the tabletop and added slots sized according to the material‑thickness parameter so the legs would fit tightly. Because nearly all dimensions reference spreadsheet values in some form, the entire model updates automatically. Changing the material thickness, for example, changes the size of all the connecting slots and tenons accordingly.</p>
+                    <video src="Media/04 Computer-Controlled Cutting/parametric-demo.mp4" autoplay loop muted></video>
+                    <p>Once the 3D model was complete, I used FreeCAD’s TechDraw workbench to generate a 2D layout for laser cutting. I started by inserting a new page and importing an empty A3 template. I added each part from the model into the page, rotating them in a way that made sense for laser cutting. After placing the parts side‑by‑side, I exported the page as an SVG file for cleanup in Inkscape. In Inkscape, I ungrouped the imported objects twice to access the raw paths. Using the “Select Same Stroke Style” option, I selected all the individual lines and deleted them. I continued by adding stroke paint, 0,01mm stroke width and removing the fill from the leftover shapes. Finally, I send the file to the Epilog Dashboard using Inkscape’s print command.</p>
+                    <img src="Media/04 Computer-Controlled Cutting/epilog.jpg" alt="">
+                    <p>After cleaning the SVG in Inkscape, I prepared the file for cutting using the Epilog Dashboard. I placed a sheet of 3 mm cardboard in the laser cutter and used the Dashboard’s camera view to crop and position the design accurately. I imported the preset for 3 mm cardboard cutting, which automatically loads appropriate speed, power, and frequency settings. Because my design only required vector cuts, no adjustments for the preset were needed. After sending the job to the laser cutter’s queue, I manually focused the laser and started the cut. The parts came out perfect on the first try, and assembly was straightforward thanks to the parametric slot sizing. The legs interlocked smoothly, and the tenons fit tightly into the tabletop, resulting in a stable miniature table.</p>
+                    <img src="Media/04 Computer-Controlled Cutting/cut-parts2.jpg" alt="">
+                    <img src="Media/04 Computer-Controlled Cutting/finished-table.jpg" alt="">
+            </main>
+        </div>
+        <div class="footer">
+            <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
+        </div>
+    </div>
+</body>
+</html>
