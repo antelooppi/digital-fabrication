@@ -9,8 +9,8 @@
 
 .header {
     /* background-color: gray; */
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
     border-bottom: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
@@ -30,8 +30,8 @@
 
 .main-content {
     /* background-color: gray; */
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
     border-bottom: 1px solid black;
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
@@ -74,8 +74,8 @@ figure {
 
 .footer {
     /* background-color: gray; */
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 1px;
 }
