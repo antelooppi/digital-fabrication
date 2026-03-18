@@ -50,13 +50,14 @@ h1 {
 }
 
 h2 {
-    margin-top: 50px;
-    margin-bottom: 35px;
+    /* margin-top: 50px; */
+    /* margin-bottom: 35px; */
 }
 
 p {
     margin-bottom: 25px;
     line-height: 25px;
+    font-size: 16px;
 }
 
 img {
@@ -74,6 +75,7 @@ figure {
     margin-bottom: 60px;
     width: 100%;
     margin-left: 0;
+    font-size: 14px;
 }
 
 .footer {
@@ -117,8 +119,8 @@ figure {
         margin-bottom: 45px;
     }
     h2 {
-        margin-top: 35px;
-        margin-bottom: 25px
+        margin-top: 45px;
+        margin-bottom: 30px;
     }
 }
 
@@ -129,6 +131,10 @@ figure {
         margin-right: 15%;
   }
    figure {
-        margin-bottom: 60px;
+        margin-bottom: 50px;
+    }
+     h2 {
+        margin-top: 45px;
+        margin-bottom: 35px;
     }
 }
