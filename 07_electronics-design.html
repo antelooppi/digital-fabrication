@@ -20,14 +20,18 @@
         <div class="main-content">
             <main>
                 <h1>Assignment 07: Electronics Design</h1>
+                    <figure>
+                            <img src="Media/07 Electronics Design/3d layout.jpg" alt="A screenshot of the final board layout.">
+                            <figcaption>The Wolf circuit board I designed for this week.</figcaption>
+                    </figure>
                     <h2>My Approach to Electronics Design</h2>
-                        <p>TBA.</p>
+                        <p>In many ways, electronics design relates directly to my practice, as I have been long interested in building my own equipment. I am mostly interested in building audio-related tools, such as synthesizer modules, standalone instruments and electric guitar related equipment, but also see many possibilities in other things I do – such as building art installations. The know-how of designing and building electronics is really beneficial for me, especially when done using EDA software like KiCad. The possibility to design and draw my own schematics and PCB layout digitally saves me time, helps me to understand circuits better and allow me to design circuit boards that are easily reproduceable. It also allows me to produce more professional and reliable boards (when comparing to stripboard or perfboard), that will hopefully serve as well-functioning tools for many years after they are first put together.</p>
                     <h2>My Design</h2>
-                        <p>For this weeks assignment, I designed a simple circuit board for XIAO RP2040 module using KiCad. For this design, I used Fablab’s KiCAD library with surface-mount parts. I started my design by adding Generic Socket Xiao module from the symbol library. This particular symbol utilizes surface-mount pin sockets as its footprint, which makes it possible to swap between different XIAO modules. I added different power symbols (3.3V and ground) to the schematics, and attached power flags to them. I then continued by adding a circuit for LED to one of the GPIO pins, which consists of an orange LED, 100ohm resistor and a ground symbol. For another GPIO, I added a circuit for a button with 10k pull-up resistor. I added an option for I2C and UART connections, using 4-pin pinsockets for both of them. For the remaining GPIO pins, I used a 5-pin pinsocket. I also added the drill bits at this phase, since they also have footprints in the PCB editor.</p>
-                         <figure>
-                            <img src="Media/07 Electronics Design/circuit.jpg" alt="A screenshot of the final circuit design.">
-                            <figcaption>The final circuit design.</figcaption>
+                        <figure>
+                            <img src="Media/07 Electronics Design/circuit.jpg" alt="A screenshot of the circuit schematics.">
+                            <figcaption>The schematics of the Wolf board.</figcaption>
                         </figure>
+                        <p>For this weeks assignment, I designed a simple circuit board for XIAO RP2040 module using KiCad. For this design, I used Fablab’s KiCAD library with surface-mount parts. I started my design by adding Generic Socket Xiao module from the symbol library. This particular symbol utilizes surface-mount pin sockets as its footprint, which makes it possible to swap between different XIAO modules. I added different power symbols (3.3V and ground) to the schematics, and attached power flags to them. I then continued by adding a circuit for LED to one of the GPIO pins, which consists of an orange LED, 100ohm resistor and a ground symbol. For another GPIO, I added a circuit for a button with 10k pull-up resistor. I added an option for I2C and UART connections, using 4-pin pinsockets for both of them. For the remaining GPIO pins, I used a 5-pin pinsocket. I also added the drill bits at this phase, since they also have footprints in the PCB editor.</p>
                         <figure>
                             <img src="Media/07 Electronics Design/ERC.jpg" alt="A screenshot of the Electrics Rules Checker.">
                             <figcaption>Passing the Electrical Rules Checker.</figcaption>
@@ -39,8 +43,8 @@
                         </figure>
                         <p>KiCad’s PCB editor organizes different kinds of PCB information into layers. After setting the net classes, I drew the tracks connections on the Front Copper layer, which contains all copper features of the front side of the PCB. After drawing the all the connections (besides the ground), I drew a temporary board shape on the Edge Cuts layer, which defines the outline of the board. I then filled the rest of the board’s front face with copper using it as a ground. This simplifies the process of drawing the grounds, and acts as a shielding for the circuit. As an additional step, I imported the final outline of a public domain wolf I had prepared in Inkscape. Finally, I added a name and version number of the board as a text using general-purpose User Layer 1.</p>
                         <figure>
-                            <img src="Media/07 Electronics Design/3d layout.jpg" alt="A screenshot of the final board layout.">
-                            <figcaption>The final board layout in 3D view.</figcaption>
+                            <img src="Media/07 Electronics Design/layout.jpg" alt="A screenshot of the final PCB layout.">
+                            <figcaption>The PCB layout of Wolfie v1.</figcaption>
                         </figure>
                         <figure>
                             <img src="Media/07 Electronics Design/DRC.jpg" alt="A screenshot of the Design Rules Checker.">
