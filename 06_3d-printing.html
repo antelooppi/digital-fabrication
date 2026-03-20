@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
+       <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
             <nav class="navbar">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -16,45 +19,41 @@
                     <li><a href="assignments.html">Assignments</a></li>
                 </ul>
             </nav>
-        </div>
-        <div class="main-content">
-            <main>
-                <h1>Assignment 06: 3D Printing</h1>
-                    <h2>My Approach to 3D Printing</h2>
-                        <p>I am mostly interested in fabricating some functional parts for my self-designed instruments with 3D printing. The parts could be, for example, something like potentiometer knobs, hinges, casings, or nuts and bolts. The ability of fabricating functioning custom parts is going to be really beneficial for me, since that eliminates the need for only relying on parts that already exits on the market. I have more than once ran into the problem of not finding the part I need, which usually leads to compromises I’m not always happy with. With 3D printing, I can finally fabricate the parts just the way I need them.</p>
-                    <h2>The Test Print</h2>
+        </header>
+        <main>
+            <h1>Assignment 06: 3D Printing</h1>
+                <h2>My Approach to 3D Printing</h2>
+                    <p>I am mostly interested in fabricating some functional parts for my self-designed instruments with 3D printing. The parts could be, for example, something like potentiometer knobs, hinges, casings, or nuts and bolts. The ability of fabricating functioning custom parts is going to be really beneficial for me, since that eliminates the need for only relying on parts that already exits on the market. I have more than once ran into the problem of not finding the part I need, which usually leads to compromises I’m not always happy with. With 3D printing, I can finally fabricate the parts just the way I need them.</p>
+                <h2>The Test Print</h2>
+                    <figure>
+                        <img src="Media/06 3D Printing/PickHolder-Sliced.jpg" alt="A screenshot of the test print sliced in PrusaSlicer.">
+                        <figcaption>The test print sliced in PrusaSlicer.</figcaption>
+                    </figure>
+                    <p>I started my 3D printing process with printing a <a href="https://www.thingiverse.com/thing:5408678">guitar pick keychain holder</a> downloaded from Thingiverse. I wanted to print something small and practical, so that the printing time would remain short. I imported the STL file to PrusaSlicer and sliced it using PLA, 0.20mm layer height, 20% infill without supports. With these settings, I managed to get the printing printing time with Prusa MK4S around six minutes. I continued by exporting the G-code and moved the file to the printer using usb stick. The printing process went fine and I was happy to see that the printed result actually worked!</p>
                         <figure>
-                            <img src="Media/06 3D Printing/PickHolder-Sliced.jpg" alt="A screenshot of the test print sliced in PrusaSlicer.">
-                            <figcaption>The test print sliced in PrusaSlicer.</figcaption>
+                        <img src="Media/06 3D Printing/PickHolder.jpg" alt="A picture of the printed guitar pick holder.">
+                        <figcaption>The printed result.</figcaption>
+                    </figure>
+                    <h2>My Design</h2>
+                        <p>For my own design, I created a custom sized nut and bolt. I wanted to explore the properties of thread making and see how it would work with 3D printed objects. I tried out multiple different ways to draw my own threads in FreeCad, which many of them were hard to manage, and felt like were constantly on the edge of breaking the sketch. I ended up using the Fasteners workbench add-on, which was straightforward to use, but still had the key parameters for making a customized design. In a nutshell, I started by making a ThreadedRod inside the Fasteners workbench, which I also used to add a matching hole to a nut with the Cut function inside the Part workbench.</p>
+                        <figure>
+                            <img src="Media/06 3D Printing/Bolt-Freecad.jpg" alt="A screenshot of the design in FreeCad.">
+                            <figcaption>The bolt and nut modeled in FreeCad.</figcaption>
                         </figure>
-                        <p>I started my 3D printing process with printing a <a href="https://www.thingiverse.com/thing:5408678">guitar pick keychain holder</a> downloaded from Thingiverse. I wanted to print something small and practical, so that the printing time would remain short. I imported the STL file to PrusaSlicer and sliced it using PLA, 0.20mm layer height, 20% infill without supports. With these settings, I managed to get the printing printing time with Prusa MK4S around six minutes. I continued by exporting the G-code and moved the file to the printer using usb stick. The printing process went fine and I was happy to see that the printed result actually worked!</p>
-                         <figure>
-                            <img src="Media/06 3D Printing/PickHolder.jpg" alt="A picture of the printed guitar pick holder.">
-                            <figcaption>The printed result.</figcaption>
-                        </figure>
-                        <h2>My Design</h2>
-                            <p>For my own design, I created a custom sized nut and bolt. I wanted to explore the properties of thread making and see how it would work with 3D printed objects. I tried out multiple different ways to draw my own threads in FreeCad, which many of them were hard to manage, and felt like were constantly on the edge of breaking the sketch. I ended up using the Fasteners workbench add-on, which was straightforward to use, but still had the key parameters for making a customized design. In a nutshell, I started by making a ThreadedRod inside the Fasteners workbench, which I also used to add a matching hole to a nut with the Cut function inside the Part workbench.</p>
+                        <p>I wanted to try out different fittings of the threads, so I exported four different versions of the same nut design with 0.0mm, 0.1mm, 0.2mm 0.3mm fitting tolerances. I continued by importing the bolt and nuts to PrusaSlicer and sliced them to get estimated printing time of 1.5 hours. I made my design dimensionally quite small to begin with, so the printing time wasn’t really a problem. Still, I wanted to optimize the design, so I reduced the unnecessary thickness of the nut and the bolt’s baseplate in FreeCad and made the bolt shorter. In PrusaSlicer, I noticed the layer height had the biggest effect to the printing time. I ended up picking 0.2mm layer height, since it was two times faster than using 0.1mm height. The infill percentage had also an effect to the printing time, but nothing as dramatic. Between 5% and 20% infill, there was only a couple minutes of difference, and between 20% and (overly exaggerated) 90%, the difference was around 15 minutes. I had a good experience printing the guitar pick holder with 20% infill, so I decided to go with the same setting. The final design doesn’t have any major overhangs when printed from the baseplate up, so I didn’t need any supports for my print. The final printing time with one bolt and four nuts was around 1 hour.</p>
                             <figure>
-                                <img src="Media/06 3D Printing/Bolt-Freecad.jpg" alt="A screenshot of the design in FreeCad.">
-                                <figcaption>The bolt and nut modeled in FreeCad.</figcaption>
-                            </figure>
-                            <p>I wanted to try out different fittings of the threads, so I exported four different versions of the same nut design with 0.0mm, 0.1mm, 0.2mm 0.3mm fitting tolerances. I continued by importing the bolt and nuts to PrusaSlicer and sliced them to get estimated printing time of 1.5 hours. I made my design dimensionally quite small to begin with, so the printing time wasn’t really a problem. Still, I wanted to optimize the design, so I reduced the unnecessary thickness of the nut and the bolt’s baseplate in FreeCad and made the bolt shorter. In PrusaSlicer, I noticed the layer height had the biggest effect to the printing time. I ended up picking 0.2mm layer height, since it was two times faster than using 0.1mm height. The infill percentage had also an effect to the printing time, but nothing as dramatic. Between 5% and 20% infill, there was only a couple minutes of difference, and between 20% and (overly exaggerated) 90%, the difference was around 15 minutes. I had a good experience printing the guitar pick holder with 20% infill, so I decided to go with the same setting. The final design doesn’t have any major overhangs when printed from the baseplate up, so I didn’t need any supports for my print. The final printing time with one bolt and four nuts was around 1 hour.</p>
-                             <figure>
-                                <img src="Media/06 3D Printing/Bolt-Sliced.jpg" alt="A screenshot of the design sliced in PrusaSlicer.">
-                                <figcaption>The nuts and bolt sliced in PrusaSlicer.</figcaption>
-                            </figure>
-                            <p>The printing process went smoothly and everything worked as intended. I was kind of surprised how much fitting tolerance was necessary to make the threads actually work, since only the largest nut with the tolerance of 0.3mm was able to screw into the bolt. I would still like to test bigger tolerances in the future just to see if the fit could be better, but for this purpose I think the end result worked nicely.</p>
-                             <figure>
-                                <img src="Media/06 3D Printing/Bolt.jpg" alt="A picture of the printed bolt and nut attached together.">
-                                <figcaption>The printed result. Note that the bolt and nut were not printed as seen in the picture, but were screwed together afterwards.</figcaption>
-                            </figure>
-                        <h2>Attachments</h2>
-                        <p><a href="Media/06 3D Printing/BoltAndNut.zip">Download the FreeCAD files</a></p>
-            </main>
-        </div>
-        <div class="footer">
-            <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
-        </div>
+                            <img src="Media/06 3D Printing/Bolt-Sliced.jpg" alt="A screenshot of the design sliced in PrusaSlicer.">
+                            <figcaption>The nuts and bolt sliced in PrusaSlicer.</figcaption>
+                        </figure>
+                        <p>The printing process went smoothly and everything worked as intended. I was kind of surprised how much fitting tolerance was necessary to make the threads actually work, since only the largest nut with the tolerance of 0.3mm was able to screw into the bolt. I would still like to test bigger tolerances in the future just to see if the fit could be better, but for this purpose I think the end result worked nicely.</p>
+                            <figure>
+                            <img src="Media/06 3D Printing/Bolt.jpg" alt="A picture of the printed bolt and nut attached together.">
+                            <figcaption>The printed result. Note that the bolt and nut were not printed as seen in the picture, but were screwed together afterwards.</figcaption>
+                        </figure>
+                    <h2>Attachments</h2>
+                    <p><a href="Media/06 3D Printing/BoltAndNut.zip">Download the FreeCAD files</a></p>
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
     </div>
 </body>
 </html>

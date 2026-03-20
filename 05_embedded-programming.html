@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
             <nav class="navbar">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -16,51 +19,46 @@
                     <li><a href="assignments.html">Assignments</a></li>
                 </ul>
             </nav>
-        </div>
-        <div class="main-content">
-            <main>
-                <h1>Assignment 05: Embedded Programming</h1>
-                    <h2>My Approach to Embedded Programming</h2>
-                        <p>I see many possibilities in embedded programming related to my work. For example, I have previously designed and built a synthesizer using Bela board and Puredata, which has been working great. For my next project, I’ve been thinking of building either a drum machine, a sequencer or a sampler. I think using embedded programming would be a great way to make this build, because I can not only program the logic of the instrument, but also design and build the interface around it. In the future, I would like to use embedded programming to build things like custom instruments, MIDI controllers, synthesizer modules and art installations.</p>
-                    <h2>Assembling and Testing the RP2040</h2>
-                        <p>For this week’s assignment, we used MicroPython to program Seeed Studio XIAO RP2040 microcontroller, which is a cheap and compact development board based on Raspberry Pi RP2040. Alongside with the RP2040, we used Aalto <a href="https://gitlab.cba.mit.edu/quentinbolsee/qpad-xiao/">Fablab QPAD.XIAO board</a>, which is a simple board-integrated interface with six capacitive sensing touch pads and a small OLED display. Before we could start programming, we had to solder the parts together. Here is the list of parts used for the build:</p>
-                            <ul>
-                                <li>1 x Seeed Studio XIAO-RP2040</li>
-                                <li>1 x Aalto Fablab QPAD.XIAO board</li>
-                                <li>1 x 0.96” OLED module</li>
-                                <li>1 x 3D printed OLED spacer</li>
-                                <li>2 x 10k surface-mount resistors</li>
-                            </ul>
-                        <p>The soldering process was quite straight forward. I started by soldering two 10k surface-mount resistors to the board. The surface-mount resistors were a lot smaller than what I’m used to, so it was helpful to solder one end at a time by adding some solder to the pad first and then applying the resistor. I used the same approach for attaching the RP2040 module, this time starting from the opposite corners and then applying solder to the rest of the pins. Finally, I attached the OLED module to the 3D printed spacer and soldered the screen to the board. </p>
+        </header>
+        <main>
+            <h1>Assignment 05: Embedded Programming</h1>
+                <h2>My Approach to Embedded Programming</h2>
+                    <p>I see many possibilities in embedded programming related to my work. For example, I have previously designed and built a synthesizer using Bela board and Puredata, which has been working great. For my next project, I’ve been thinking of building either a drum machine, a sequencer or a sampler. I think using embedded programming would be a great way to make this build, because I can not only program the logic of the instrument, but also design and build the interface around it. In the future, I would like to use embedded programming to build things like custom instruments, MIDI controllers, synthesizer modules and art installations.</p>
+                <h2>Assembling and Testing the RP2040</h2>
+                    <p>For this week’s assignment, we used MicroPython to program Seeed Studio XIAO RP2040 microcontroller, which is a cheap and compact development board based on Raspberry Pi RP2040. Alongside with the RP2040, we used Aalto <a href="https://gitlab.cba.mit.edu/quentinbolsee/qpad-xiao/">Fablab QPAD.XIAO board</a>, which is a simple board-integrated interface with six capacitive sensing touch pads and a small OLED display. Before we could start programming, we had to solder the parts together. Here is the list of parts used for the build:</p>
+                        <ul>
+                            <li>1 x Seeed Studio XIAO-RP2040</li>
+                            <li>1 x Aalto Fablab QPAD.XIAO board</li>
+                            <li>1 x 0.96” OLED module</li>
+                            <li>1 x 3D printed OLED spacer</li>
+                            <li>2 x 10k surface-mount resistors</li>
+                        </ul>
+                    <p>The soldering process was quite straight forward. I started by soldering two 10k surface-mount resistors to the board. The surface-mount resistors were a lot smaller than what I’m used to, so it was helpful to solder one end at a time by adding some solder to the pad first and then applying the resistor. I used the same approach for attaching the RP2040 module, this time starting from the opposite corners and then applying solder to the rest of the pins. Finally, I attached the OLED module to the 3D printed spacer and soldered the screen to the board. </p>
+                    <figure>
+                        <img src="Media/05 Embedded Programming/soldering.jpg" alt="A picture of soldered QPAD, cutters, tweezers and soldering iron.">
+                        <figcaption>The QPAD soldered together.</figcaption>
+                    </figure>
+                    <p>After soldering and testing the board connections with multimeter, I installed Thonny editor to my computer, which is an open-source Python IDE for beginners. Before connecting the RP2040 to the computer, I changed Thonny’s settings for Interpreter Device to “MicroPython (Raspberry Pi Pico)” and Port to “Try to detect port automatically”. I then connected the module to the computer using USB cable and installed MicroPython to it. After that, I uploaded a test code from Seeedstudio’s wiki page to the module and ran the script. As a result, I was able to get the LED light of the module to blink once every second while Thonny’s shell counted numbers upwards, which was the expected behaviour of the program. After the successful test, I installed external libraries to control the RP2040’s NeoPixel LED, OLED screen and internal resistor step-response loading measurement. I downloaded the files <a href="https://gitlab.cba.mit.edu/quentinbolsee/qpad-xiao/-/tree/main/code/Micropython">from here</a>.</p>
+                <h2>Modifying the Example Programs</h2>
+                    <p>I continued by editing a couple of pre-made MicroPython examples, also found from the link above. The first file I edited was hello_neopixel.py, which utilizes RP2040’s NeoPixel LED. This script allows you to control the LED’s color using RGB values and to program a sequence of colors. I edited the script by reducing the number of colors to black and white, and added my own orange color. I updated the sequence to use these three colors. Finally, I adjusted the speed of the sequence by changing the value passed to the <b>utime.sleep()</b> call.</p>
+                    <figure>
+                        <img src="Media/05 Embedded Programming/hello_neopixel.jpg" alt="A screenshot of MicroPython code.">
+                        <figcaption>Modified version of the hello_neopixel.py file.</figcaption>
+                    </figure>
+                    <p>The second script I edited was hello_oled.py, which originally displayed a static “Hello, world!” message on the screen. I wanted the text to move, so I began by creating the x, y, and frequency variables. After that, I updated the call to <b>oled.text()</b> by using the x and y variables as its coordinates. I wanted the text to move up and down, so I duplicated the four lines of code inside the <b>while True</b> loop several times and adjusted their y coordinates by +10 or –10 accordingly. I also added the frequency variable to the <b>sleep()</b> call so the movement speed is easy to change. And of course, as a Finn, I had to change the text to Finnish, so I created a text variable and passed it to the <b>oled.text()</b> function.</p>
+                    <figure>
+                        <video src="Media/05 Embedded Programming/hello_world.mp4" autoplay loop muted></video>
+                        <figcaption>Modified version of the hello_oled.py program in use.</figcaption>
+                    </figure>
+                <h2>My Program</h2>
+                    <p>As for my own program, I wanted to utilize the QPAD board’s touch inputs with RP2040’s OLED screen. The bouncing text of the previous assignment reminded me of one of the earliest video games ever made, Pong, so I decided to make a simple solo game where the player moves up and down to keep the ball in play as it bounces back from the rear wall and the sides. Every time the player succeeds to hit the ball, they get one point added to their score. With every hit, the ball’s speed increases. If the ball passes the player’s character, the game is over.</p>
+                    <p>I used Aalto’s AI Assistant for this assignment. I started by prompting it a similar description of the game idea as above, and added in the list of parts I was using. The first versions of the game didn’t work at all, since I had a problem starting the game. I suspected the touch inputs weren’t working correctly, so I asked the AI to make changes to the program based on Kris’ modified hello_touch_neopixel.py patch. This helped a lot, but I also needed to add a description of the QPAD’s pin arrangement and fine-tune some of the pin numbers inside the code by hand. After these steps, the pads were working, but the physics of the game were acting weird. I prompted couple more suggestions to the AI on how the ball should move, fine-tuned the ball speed, and voilà! – I had a simple Pong-inspired solo game on my QPAD.</p>
                         <figure>
-                            <img src="Media/05 Embedded Programming/soldering.jpg" alt="A picture of soldered QPAD, cutters, tweezers and soldering iron.">
-                            <figcaption>The QPAD soldered together.</figcaption>
-                        </figure>
-                        <p>After soldering and testing the board connections with multimeter, I installed Thonny editor to my computer, which is an open-source Python IDE for beginners. Before connecting the RP2040 to the computer, I changed Thonny’s settings for Interpreter Device to “MicroPython (Raspberry Pi Pico)” and Port to “Try to detect port automatically”. I then connected the module to the computer using USB cable and installed MicroPython to it. After that, I uploaded a test code from Seeedstudio’s wiki page to the module and ran the script. As a result, I was able to get the LED light of the module to blink once every second while Thonny’s shell counted numbers upwards, which was the expected behaviour of the program. After the successful test, I installed external libraries to control the RP2040’s NeoPixel LED, OLED screen and internal resistor step-response loading measurement. I downloaded the files <a href="https://gitlab.cba.mit.edu/quentinbolsee/qpad-xiao/-/tree/main/code/Micropython">from here</a>.</p>
-                    <h2>Modifying the Example Programs</h2>
-                        <p>I continued by editing a couple of pre-made MicroPython examples, also found from the link above. The first file I edited was hello_neopixel.py, which utilizes RP2040’s NeoPixel LED. This script allows you to control the LED’s color using RGB values and to program a sequence of colors. I edited the script by reducing the number of colors to black and white, and added my own orange color. I updated the sequence to use these three colors. Finally, I adjusted the speed of the sequence by changing the value passed to the <b>utime.sleep()</b> call.</p>
-                        <figure>
-                            <img src="Media/05 Embedded Programming/hello_neopixel.jpg" alt="A screenshot of MicroPython code.">
-                            <figcaption>Modified version of the hello_neopixel.py file.</figcaption>
-                        </figure>
-                        <p>The second script I edited was hello_oled.py, which originally displayed a static “Hello, world!” message on the screen. I wanted the text to move, so I began by creating the x, y, and frequency variables. After that, I updated the call to <b>oled.text()</b> by using the x and y variables as its coordinates. I wanted the text to move up and down, so I duplicated the four lines of code inside the <b>while True</b> loop several times and adjusted their y coordinates by +10 or –10 accordingly. I also added the frequency variable to the <b>sleep()</b> call so the movement speed is easy to change. And of course, as a Finn, I had to change the text to Finnish, so I created a text variable and passed it to the <b>oled.text()</b> function.</p>
-                        <figure>
-                            <video src="Media/05 Embedded Programming/hello_world.mp4" autoplay loop muted></video>
-                            <figcaption>Modified version of the hello_oled.py program in use.</figcaption>
-                        </figure>
-                    <h2>My Program</h2>
-                        <p>As for my own program, I wanted to utilize the QPAD board’s touch inputs with RP2040’s OLED screen. The bouncing text of the previous assignment reminded me of one of the earliest video games ever made, Pong, so I decided to make a simple solo game where the player moves up and down to keep the ball in play as it bounces back from the rear wall and the sides. Every time the player succeeds to hit the ball, they get one point added to their score. With every hit, the ball’s speed increases. If the ball passes the player’s character, the game is over.</p>
-                        <p>I used Aalto’s AI Assistant for this assignment. I started by prompting it a similar description of the game idea as above, and added in the list of parts I was using. The first versions of the game didn’t work at all, since I had a problem starting the game. I suspected the touch inputs weren’t working correctly, so I asked the AI to make changes to the program based on Kris’ modified hello_touch_neopixel.py patch. This helped a lot, but I also needed to add a description of the QPAD’s pin arrangement and fine-tune some of the pin numbers inside the code by hand. After these steps, the pads were working, but the physics of the game were acting weird. I prompted couple more suggestions to the AI on how the ball should move, fine-tuned the ball speed, and voilà! – I had a simple Pong-inspired solo game on my QPAD.</p>
-                         <figure>
-                            <video src="Media/05 Embedded Programming/game.mp4" autoplay loop muted></video>
-                            <figcaption>The Pong-inspired solo game in action. Although the game utilizes only two of the QPAD's touch pads, I tested all inputs to be functional during the process.</figcaption>
-                        </figure>
-
-            </main>
-        </div>
-        <div class="footer">
-            <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
-        </div>
+                        <video src="Media/05 Embedded Programming/game.mp4" autoplay loop muted></video>
+                        <figcaption>The Pong-inspired solo game in action. Although the game utilizes only two of the QPAD's touch pads, I tested all inputs to be functional during the process.</figcaption>
+                    </figure>
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
     </div>
 </body>
 </html>

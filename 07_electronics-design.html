@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
             <nav class="navbar">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -16,56 +19,52 @@
                     <li><a href="assignments.html">Assignments</a></li>
                 </ul>
             </nav>
-        </div>
-        <div class="main-content">
-            <main>
-                <h1>Assignment 07: Electronics Design</h1>
-                    <h2>My Approach to Electronics Design</h2>
-                        <p>In many ways, electronics design relates directly to my practice, as I have been long interested in building my own equipment. I am mostly interested in building audio-related tools, such as synthesizer modules, standalone instruments and electric guitar equipment, but also see many possibilities in other things I do – like building art installations. The know-how of designing and building electronics is really beneficial for me, especially when done using EDA software like KiCad. The possibility to design and draw my own schematics and PCB layout digitally saves me time, helps me to be more intentional and allow me to design circuit boards that are easily reproduceable. It also allows me to produce more professional and reliable boards (when comparing to stripboard or perfboard), that will hopefully serve as well-functioning tools for many years after first put together.</p>
-                    <h2>My Design</h2>
-                        <figure>
-                            <img src="Media/07 Electronics Design/circuit.jpg" alt="A screenshot of the circuit schematics.">
-                            <figcaption>The schematics of the board.</figcaption>
-                        </figure>
-                        <p>For this weeks assignment, I designed a simple circuit board around XIAO RP2040 module using KiCad. For this design, I used Fablab’s KiCad library with surface-mount parts. I started my design by adding a Generic Socket XIAO module from the symbol library. This particular symbol uses pin sockets as its footprint, which makes it possible to swap between different XIAO modules. I added different power symbols (3.3V and ground) to the schematics, and attached power flags to them. I then continued by adding a circuit for LED to one of the GPIO pins, which consists of an orange LED, 100ohm resistor and a ground symbol. For another GPIO, I added a circuit for a button with 10k pull-up resistor. I added an option for I2C and UART connections, using 4-pin pin sockets for both of them. For the remaining GPIO pins, I used a 5-pin pin socket as a break out. Lastly, I added the drill bits to the schematics, since the Fablab library already had existing footprints with adjusted fitting tolerances for them.</p>
-                        <figure>
-                            <img src="Media/07 Electronics Design/ERC.jpg" alt="A screenshot of the Electrics Rules Checker.">
-                            <figcaption>Passing the Electrical Rules Checker.</figcaption>
-                        </figure>
-                        <p>After passing the Electrical Rules Checker, I moved on to the PCB editor. Before doing anything else in the editor, I defined the Net Class values. Net Classes are used for setting different rules for the tracks, such as track width and minimum clearance between tracks, and it is important to set the values before drawing any connections. For my purpose, I set the values for Clearance, Track Width, Via Size and Hole Size, since they had to correspond to the drill bits sizes used at the Fablab.</p>
-                        <figure>
-                            <img src="Media/07 Electronics Design/netclasses.jpg" alt="A screenshot of the net classes window.">
-                            <figcaption>The Net Class values used. The values for Clearance, Track Width, Via Size and Hole Size were relevant for this assignment.</figcaption>
-                        </figure>
-                        <p>KiCad’s PCB editor organizes different kinds of PCB information into layers. I started planning the layout by importing an <a href="https://www.clipartmax.com/middle/m2i8A0N4d3K9d3H7_wolf-silhouette-vector-image-public-domain-vectors-wolf-silhouette/">image of a wolf</a> I had modified in Inkscape to the Edge Cuts layer, which defines the outline of the board. I then updated the PCB from schematic and started moving the individual components around, trying to find a layout with the least amount of crossing rat’s nests (the dim lines showing connections between parts). When I had found a layout I was happy with, I drew the track connections (excluding the grounds) to the Front Copper layer, which contains all copper features of the PCB’s front side. I then filled the rest of the board’s front face with copper, using the filled area as the ground. This simplifies the process of drawing the ground connections, and acts as a shielding for the circuit. Finally, I added a name and version number as a text to the general-purpose User Layer 1.</p>
-                        <figure>
-                            <img src="Media/07 Electronics Design/layout.jpg" alt="A screenshot of the final PCB layout.">
-                            <figcaption>The PCB layout of Wolfie v1.</figcaption>
-                        </figure>
-                        <figure>
-                            <img src="Media/07 Electronics Design/DRC.jpg" alt="A screenshot of the Design Rules Checker.">
-                            <figcaption>Passing the Design Rules Checker.</figcaption>
-                        </figure>
-                        <p>After passing the Design Rules Checker, I exported the individual layers as Gerber files for PCB milling process at the Fablab. In KiCad’s Plot window, I used Gerber as plot format, and included Front Copper, Edge Cuts and User 1 layers to the export. To help the layer alignment process later in CopperCam, I included Edge Cuts on all layers as an outline. After plotting the layers, I generated the Drill Files using Gerber X2 format. As a final step, I used KiCad’s Gerber Viewer to check the files had formatted as intended.</p>
-                        <figure>
-                            <img src="Media/07 Electronics Design/gerber_plot.jpg" alt="A screenshot of KiCAD's plot window.">
-                            <figcaption>The settings used for plotting the Gerber files.</figcaption>
-                        </figure>
-                        <figure>
-                            <img src="Media/07 Electronics Design/drill_files.jpg" alt="A screenshot of KiCAD's plot window.">
-                            <figcaption>The settings used for plotting the Drill Files.</figcaption>
-                        </figure>
-                        <figure>
-                            <img src="Media/07 Electronics Design/gerber_viewer.jpg" alt="A screenshot of KiCAD's Gerber Viewer.">
-                            <figcaption>The exported files in KiCad's Gerber Viewer.</figcaption>
-                        </figure>
-                    <h2>Attachments</h2>
-                        <p><a href="Media/07 Electronics Design/Wolfie_v1.zip">Download the KiCad files</a></p>
-            </main>
-        </div>
-        <div class="footer">
-            <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
-        </div>
+        </header>
+        <main>
+            <h1>Assignment 07: Electronics Design</h1>
+                <h2>My Approach to Electronics Design</h2>
+                    <p>In many ways, electronics design relates directly to my practice, as I have been long interested in building my own equipment. I am mostly interested in building audio-related tools, such as synthesizer modules, standalone instruments and electric guitar equipment, but also see many possibilities in other things I do – like building art installations. The know-how of designing and building electronics is really beneficial for me, especially when done using EDA software like KiCad. The possibility to design and draw my own schematics and PCB layout digitally saves me time, helps me to be more intentional and allow me to design circuit boards that are easily reproduceable. It also allows me to produce more professional and reliable boards (when comparing to stripboard or perfboard), that will hopefully serve as well-functioning tools for many years after first put together.</p>
+                <h2>My Design</h2>
+                    <figure>
+                        <img src="Media/07 Electronics Design/circuit.jpg" alt="A screenshot of the circuit schematics.">
+                        <figcaption>The schematics of the board.</figcaption>
+                    </figure>
+                    <p>For this weeks assignment, I designed a simple circuit board around XIAO RP2040 module using KiCad. For this design, I used Fablab’s KiCad library with surface-mount parts. I started my design by adding a Generic Socket XIAO module from the symbol library. This particular symbol uses pin sockets as its footprint, which makes it possible to swap between different XIAO modules. I added different power symbols (3.3V and ground) to the schematics, and attached power flags to them. I then continued by adding a circuit for LED to one of the GPIO pins, which consists of an orange LED, 100ohm resistor and a ground symbol. For another GPIO, I added a circuit for a button with 10k pull-up resistor. I added an option for I2C and UART connections, using 4-pin pin sockets for both of them. For the remaining GPIO pins, I used a 5-pin pin socket as a break out. Lastly, I added the drill bits to the schematics, since the Fablab library already had existing footprints with adjusted fitting tolerances for them.</p>
+                    <figure>
+                        <img src="Media/07 Electronics Design/ERC.jpg" alt="A screenshot of the Electrics Rules Checker.">
+                        <figcaption>Passing the Electrical Rules Checker.</figcaption>
+                    </figure>
+                    <p>After passing the Electrical Rules Checker, I moved on to the PCB editor. Before doing anything else in the editor, I defined the Net Class values. Net Classes are used for setting different rules for the tracks, such as track width and minimum clearance between tracks, and it is important to set the values before drawing any connections. For my purpose, I set the values for Clearance, Track Width, Via Size and Hole Size, since they had to correspond to the drill bits sizes used at the Fablab.</p>
+                    <figure>
+                        <img src="Media/07 Electronics Design/netclasses.jpg" alt="A screenshot of the net classes window.">
+                        <figcaption>The Net Class values used. The values for Clearance, Track Width, Via Size and Hole Size were relevant for this assignment.</figcaption>
+                    </figure>
+                    <p>KiCad’s PCB editor organizes different kinds of PCB information into layers. I started planning the layout by importing an <a href="https://www.clipartmax.com/middle/m2i8A0N4d3K9d3H7_wolf-silhouette-vector-image-public-domain-vectors-wolf-silhouette/">image of a wolf</a> I had modified in Inkscape to the Edge Cuts layer, which defines the outline of the board. I then updated the PCB from schematic and started moving the individual components around, trying to find a layout with the least amount of crossing rat’s nests (the dim lines showing connections between parts). When I had found a layout I was happy with, I drew the track connections (excluding the grounds) to the Front Copper layer, which contains all copper features of the PCB’s front side. I then filled the rest of the board’s front face with copper, using the filled area as the ground. This simplifies the process of drawing the ground connections, and acts as a shielding for the circuit. Finally, I added a name and version number as a text to the general-purpose User Layer 1.</p>
+                    <figure>
+                        <img src="Media/07 Electronics Design/layout.jpg" alt="A screenshot of the final PCB layout.">
+                        <figcaption>The PCB layout of Wolfie v1.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="Media/07 Electronics Design/DRC.jpg" alt="A screenshot of the Design Rules Checker.">
+                        <figcaption>Passing the Design Rules Checker.</figcaption>
+                    </figure>
+                    <p>After passing the Design Rules Checker, I exported the individual layers as Gerber files for PCB milling process at the Fablab. In KiCad’s Plot window, I used Gerber as plot format, and included Front Copper, Edge Cuts and User 1 layers to the export. To help the layer alignment process later in CopperCam, I included Edge Cuts on all layers as an outline. After plotting the layers, I generated the Drill Files using Gerber X2 format. As a final step, I used KiCad’s Gerber Viewer to check the files had formatted as intended.</p>
+                    <figure>
+                        <img src="Media/07 Electronics Design/gerber_plot.jpg" alt="A screenshot of KiCAD's plot window.">
+                        <figcaption>The settings used for plotting the Gerber files.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="Media/07 Electronics Design/drill_files.jpg" alt="A screenshot of KiCAD's plot window.">
+                        <figcaption>The settings used for plotting the Drill Files.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="Media/07 Electronics Design/gerber_viewer.jpg" alt="A screenshot of KiCAD's Gerber Viewer.">
+                        <figcaption>The exported files in KiCad's Gerber Viewer.</figcaption>
+                    </figure>
+                <h2>Attachments</h2>
+                    <p><a href="Media/07 Electronics Design/Wolfie_v1.zip">Download the KiCad files</a></p>
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
     </div>
 </body>
 </html>
