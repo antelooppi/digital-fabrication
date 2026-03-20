@@ -49,7 +49,7 @@ footer {
 
 .navbar a {
     color: rgb(255, 255, 255);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 main {
