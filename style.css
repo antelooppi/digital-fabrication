@@ -133,6 +133,16 @@ footer {
         margin-top: 30px;
         margin-bottom: 20px;
     }
+    .logo img {
+    width: 247px;
+    height: 16px;
+    }
+    .navbar ul {
+        padding-left: 0;
+    }
+    header {
+        text-align: center;
+    }
 }
 
 /* Tablets (over 768px) */
