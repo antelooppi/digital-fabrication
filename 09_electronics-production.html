@@ -28,13 +28,13 @@
                     <p>This week, I milled, soldered and coded a test program for the Wolf board I designed during the last assignment. I started by turning the Gerber files I generated last week into tool paths using CopperCam software. The Gerber is an open industry-standard file system for PCB making. It is basically a blueprint for the PCB manufacturing process, including data for different layers like copper pads, silk screen labels, drill files and such.</p>
                     <p>CopperCam is able to import Gerber layers and generate customizable tool path sequences with user‑defined drill diameters as NC files. For the PCB milling process, the most important tool parameters in CopperCAM are the tool settings for engraving, drilling, hatching, and cutting. The drill bit shape, effective cutting width, and cutting depth directly determine isolation quality and how much copper is removed. It’s also important to set the correct tool for each machining stage so CopperCAM generates tool paths that match the physical drill bits loaded into the machine. Proper settings and tool selection are what ensure clean, accurate PCB milling.</p>
                     <figure>
-                        <img src="Media/09 Electronics Production/coppercam3.jpg" alt="">
+                        <img src="Media/09 Electronics Production/coppercam.jpg" alt="">
                         <figcaption>A screenshot of CopperCam tool settings used for the project.</figcaption>
                     </figure>
                 <h2>The Milling Process</h2>
                     <figure>
-                        <img src="Media/09 Electronics Production/vpanel3.jpg" alt="">
-                        <figcaption>The Vpanel software, used for controlling the Roland SRM-20.</figcaption>
+                        <img src="Media/09 Electronics Production/vpanel.jpg" alt="">
+                        <figcaption>The Vpanel software, used to control the Roland SRM-20.</figcaption>
                     </figure>
                     <p>I used Roland SRM-20 to mill the board. I started by measuring the size of my design in KiCad, and picked a board size accordingly. I then measured the thickness of the board, and set it’s value in CopperCam before exporting the NC files. I sanded off the protective coating from the copper surface, and used double-sided tape to attach the board securely to the machine’s wooden plate.</p>
                     <p>I continued by changing the drill bit to 60 degree v-bit to do the engraving. When changing the drill bit for the SRM-20, the setting of the z origin has to be done manually. The sequence of action includes changing the drill bit, lowering the drill near the board’s surface (leaving room for the drill to go low enough), loosening and lowering the drill bit to the working surface by hand, and securing the set screw again. I defined the drill’s z origin to this position in Roland Vpanel software, which is being used to control the milling process with the SRM-20. After that I moved the drill to the lower-left corner of the board and defined the XY origin there.</p>
