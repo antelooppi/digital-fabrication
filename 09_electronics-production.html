@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Fabrication Course Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Assignment 09: Electronics Production</h1>
+                <h2>My Approach to Electronics Production</h2>
+                    <p>TBA</p>
+                <h2>The File Preparation for Milling</h2>
+                    <p>This week, I milled, soldered and coded a test program for the Wolf board I designed during the last assignment. I started by turning the Gerber files I generated last week into tool paths using CopperCam software. The Gerber is an open industry-standard file system for PCB making. It is basically a blueprint for the PCB manufacturing process, including data for different layers like copper pads, silk screen labels, drill files and such.</p>
+                    <p>CopperCam is able to import Gerber layers and generate customizable tool path sequences with user‑defined drill diameters as NC files. For the PCB milling process, the most important tool parameters in CopperCAM are the tool settings for engraving, drilling, hatching, and cutting. The drill bit shape, effective cutting width, and cutting depth directly determine isolation quality and how much copper is removed. It’s also important to set the correct tool for each machining stage so CopperCAM generates tool paths that match the physical drill bits loaded into the machine. Proper settings and tool selection are what ensure clean, accurate PCB milling.</p>
+                    <figure>
+                        <img src="Media/09 Electronics Production/coppercam3.jpg" alt="">
+                        <figcaption>A screenshot of CopperCam tool settings used for the project.</figcaption>
+                    </figure>
+                <h2>The Milling Process</h2>
+                    <figure>
+                        <img src="Media/09 Electronics Production/vpanel3.jpg" alt="">
+                        <figcaption>The Vpanel software, used for controlling the Roland SRM-20.</figcaption>
+                    </figure>
+                    <p>I used Roland SRM-20 to mill the board. I started by measuring the size of my design in KiCad, and picked a board size accordingly. I then measured the thickness of the board, and set it’s value in CopperCam before exporting the NC files. I sanded off the protective coating from the copper surface, and used double-sided tape to attach the board securely to the machine’s wooden plate.</p>
+                    <p>I continued by changing the drill bit to 60 degree v-bit to do the engraving. When changing the drill bit for the SRM-20, the setting of the z origin has to be done manually. The sequence of action includes changing the drill bit, lowering the drill near the board’s surface (leaving room for the drill to go low enough), loosening and lowering the drill bit to the working surface by hand, and securing the set screw again. I defined the drill’s z origin to this position in Roland Vpanel software, which is being used to control the milling process with the SRM-20. After that I moved the drill to the lower-left corner of the board and defined the XY origin there.</p>
+                    <p>After setting up the drill bit and origin points, it was finally time to mill. I imported the NC files to the Vpanel software and started the cutting process. When the engraving process was done, I changed the drill bit to 0,8mm router, set the Z origin for the new drill bit, and milled the mounting holes and outlines for the board.</p>
+                    <figure>
+                        <img src="Media/09 Electronics Production/milling.jpg" alt="">
+                        <figcaption>The milling in process.</figcaption>
+                    </figure>
+                <h2>Assembling the Board</h2>
+                    <figure>
+                        <img src="Media/09 Electronics Production/soldering.jpg" alt="">
+                        <figcaption>Soldering the board.</figcaption>
+                    </figure>
+                    <p>After the milling was done, I cleaned the board’s edges and assembled the board. The assembling process was otherwise straightforward, but I had some issues with solder not sticking to the board’s surface. I’m still not sure the reason for this, since the test board I had made earlier didn’t have the same problem. I tried sanding the copper surface more and cleaning it with isopropyl alcohol, since I suspected there was still some coating left, but that didn’t help too much. I tackled the problem using a lot of flux when soldering, which helped a little. Because of this problem, the soldering process was quite slow and tedious, and I had to do some cleanup work with desoldering wick in couple places. Other than that, I didn’t run into any major issues, and I was able to finish the soldering process in couple hours. After the soldering was done, I tested the board with multimeter, making sure there was no bridged connections or short circuits.</p>
+                    <figure>
+                        <img src="Media/09 Electronics Production/wolfie finished.jpg" alt="">
+                        <figcaption>The finished board.</figcaption>
+                    </figure>
+                <h2>Writing the Test Code</h2>
+                    <figure>
+                        <img src="Media/09 Electronics Production/test code.jpg" alt="">
+                        <figcaption>The test code written for Wolfie v1.</figcaption>
+                    </figure>
+                    <p>I wrote a simple test program in MicroPython for the circuit, with the aim of making an LED flash when the button is pressed. I started by importing the pins from the machine, and assigned them as inputs and outputs inside the variables. I then wrote a loop, where the led is off by default, and gets triggered only when the button is pressed down. It took me a while to find the correct pin numbers, since the RP2040’s pin diagram was kind of overwhelming at first. After finally resolving the correct pin numbers, I managed to light the LED with pressing the button. To make the code a little bit more interesting, I imported time to the code and added time.sleep() functions as a sequence to the loop to make the LED blink when the button is pressed.</p>
+                    <figure>
+                        <video src="Media/09 Electronics Production/wolfie.mp4" autoplay loop muted></video>
+                        <figcaption>Wolfie in its natural habitat. Testing that the code works.</figcaption>
+                    </figure>
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
+    </div>
+</body>
+</html>
