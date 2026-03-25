@@ -79,15 +79,6 @@ main p {
     font-size: 16px;
 }
 
-main aside {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    line-height: 25px;
-    font-size: 16px;
-    background-color: #eeeeee;
-    padding: 25px;
-}
-
 main a {
     color: rgb(0, 42, 255);
 }
@@ -108,6 +99,19 @@ main figure {
     width: 100%;
     margin-left: 0;
     font-size: 14px;
+}
+
+aside {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    line-height: 25px;
+    font-size: 16px;
+    background-color: #eeeeee;
+    padding: 25px;
+}
+
+aside h3 {
+    
 }
 
 .assignments-list {
