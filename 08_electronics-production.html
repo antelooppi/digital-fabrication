@@ -29,12 +29,12 @@
                     <p>This week I milled, soldered and coded a test program for the Wolfie v1 board I designed during the last assignment. I started by turning the Gerber files I generated last week into tool paths using CopperCam software. The Gerber is an open industry-standard file system for PCB making. It is basically a blueprint for the PCB manufacturing process, including data for different layers like copper pads, silk screen labels, drill files and such.</p>
                     <p>CopperCam is able to import Gerber layers and generate customizable tool path sequences with user‑defined drill settings as NC files. For the PCB milling process, the most important tool parameters in CopperCAM are the tool settings for engraving, drilling, hatching, and cutting. The drill bit shape, cutting width, and cutting depth directly determine isolation quality and how much copper is removed. It’s also important to set the correct tool for each machining stage so CopperCAM generates tool paths that match the physical drill bits loaded into the machine. Proper settings and tool selection are what ensure clean, accurate PCB milling.</p>
                     <figure>
-                        <img src="Media/08 Electronics Production/coppercam.jpg" alt="">
+                        <img src="Media/08 Electronics Production/coppercam.jpg" alt="A screenshot of the CopperCam software.">
                         <figcaption>A screenshot of the CopperCam tool settings used for the milling.</figcaption>
                     </figure>
                 <h2>The Milling Process</h2>
                     <figure>
-                        <img src="Media/08 Electronics Production/vpanel.jpg" alt="">
+                        <img src="Media/08 Electronics Production/vpanel.jpg" alt="A screenshot of the VPanel software.">
                         <figcaption>A screenshot of the VPanel software, used to control the Roland SRM-20.</figcaption>
                     </figure>
                     <p>I used the Roland SRM-20 to mill the board. I started by measuring the size of my design in KiCad, and picked a board size accordingly. I then measured the thickness of the board, and set it’s value in CopperCam before exporting the NC files. I sanded off the protective coating from the copper surface, and used double-sided tape to attach the board securely to the machine’s wooden plate.</p>
@@ -46,18 +46,18 @@
                     </figure>
                 <h2>Assembling the Board</h2>
                     <figure>
-                        <img src="Media/08 Electronics Production/soldering.jpg" alt="">
+                        <img src="Media/08 Electronics Production/soldering.jpg" alt="A picture of a partly soldered circuit board.">
                         <figcaption>Soldering the board.</figcaption>
                     </figure>
                     <p>After the milling was done, I cleaned the board’s edges and assembled the board. The assembling process was otherwise straightforward, but I had some issues with solder not sticking to the board’s surface. I’m still not sure why this happened, since the test board I had made earlier with similar fashion didn’t have the same problem. I suspected there was still some coating left, so I tried sanding the copper surface more and cleaning it with isopropyl alcohol, but that didn’t help much. I continued soldering the board using a lot of flux, which helped a little. As I had this problem, the soldering process was quite slow and tedious, and I had to do some cleanup work with desoldering wick in couple places. Other than that, I didn’t run into any major issues, and was able to finish the soldering process in few hours. After the soldering was done, I tested the board with multimeter, making sure there was no bridged connections or short circuits.</p>
                     <figure>
-                        <img src="Media/08 Electronics Production/wolfie finished.jpg" alt="">
+                        <img src="Media/08 Electronics Production/wolfie finished.jpg" alt="A picture of the finished circuit board.">
                         <figcaption>The finished Wolfie v1 board.</figcaption>
                     </figure>
                 <h2>Writing the Test Code</h2>
                     <p>I wrote a simple test program in MicroPython to verify the circuit by making an LED flash when the button is pressed. I began by importing the necessary pin classes from the machine module and configuring the pins as inputs and outputs. I then added a loop, where the LED remains off by default and turns on only when the button is pressed. Finding the correct pin numbers took some time, as the RP2040 pin diagram was a bit overwhelming to read at first. Once solving the right pins, I was able to successfully light the LED using the button. To make the program more interesting, I also imported the time module and added time.sleep() delay functions in the loop so the LED blinks while the button is held down.</p>
                     <figure>
-                        <img src="Media/08 Electronics Production/test code.jpg" alt="">
+                        <img src="Media/08 Electronics Production/test code.jpg" alt="A screenshot of the test code.">
                         <figcaption>The test code written for Wolfie v1.</figcaption>
                     </figure>
                     <aside>
