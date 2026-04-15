@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Fabrication Course Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Assignment 09: Input and Output Devices</h1>
+                <h2>My Design</h2>
+                    <p>For this week’s assignment, I fabricated a simple PCB test board for connecting different input and output devices. I wanted to create a simple one-knob interface, which would control a servo motor and output its value on integrated screen. I built my design around Seeed Studio ESP32-C3 MCU, using an encoder as an input, and an I2C OLED screen with DF9GMS servo motor as an output. I also included a Qwiic connector for swapping different I2C modules. I designed the PCB in KiCad and milled it using the Roland SRM-20. Here is the assembled board:</p>
+                <h2>Testing the Encoder</h2>
+                    <p>The encoder is attached to the board using surface-mounted pin slots. I used a five-pin rotary encoder, which has an integrated push-button function. The two outer pins on the three-legged side are connected to ESP32’s GPIO pins two and three. This side reads the rotary movement of the encoder. The second pin on the two-legged side is connected to GPIO pin four. This side is reading the push-button state. The remaining two pins are connected to the ground.</p>
+                    <p>I wrote a simple MicroPython test code for the encoder, which increases or decreases the number depending on the direction of the rotary movement and prints it in real time into Thonny’s shell. The push-button resets the number to 0. Here is the test code:</p>
+                    <pre><code>
+# Encoder test code
+
+from machine import Pin
+import time
+
+pin_a = Pin(2, Pin.IN, Pin.PULL_UP)
+pin_b = Pin(3, Pin.IN, Pin.PULL_UP)
+pin_sw = Pin(4, Pin.IN, Pin.PULL_UP)
+
+last_a = pin_a.value()
+last_button = 1
+
+value = 0
+
+while True:
+    
+    a = pin_a.value()
+    b = pin_b.value()
+    button = pin_sw.value()
+
+    if a != last_a:
+        if a == b:
+            value += 1      # Clockwise
+        else:
+            value -= 1      # Counter‑clockwise
+
+        print("Value:", value)
+    
+    if button == 0 and last_button == 1:
+        value = 0
+        print("Value reset:", value)
+
+    last_a = a
+    last_button = button
+    time.sleep_ms(1)
+                    </code></pre>
+                <h2>Testing the OLED Screen</h2>
+                    <p>I wanted to add a real-time monitoring possibility for standalone operation, so I implemented a small OLED screen to the board. The screen is connected to the board using surface-mount pin sockets, and it uses the I2C protocol for communication. The I2C protocol enables chaining multiple devices together in a serial-communication bus, and consists of only two signals: Serial Clock (SCL) and Serial Data (SDA). The OLED screen needs also power, so the 3.3V and ground are also needed.</p>
+                    <p>I wrote a test code for the screen...</p>
+                    <pre><code>
+# OLED test Counter
+
+from ssd1306 import SSD1306_I2C
+from machine import Pin, I2C
+from time import sleep
+
+i2c = I2C(0, scl=Pin(7), sda=Pin(6), freq=500000)#Grove - OLED Display 0.96" (SSD1315)
+oled = SSD1306_I2C(128, 64, i2c)
+
+screen_width = 128
+screen_height = 64
+character_width = 8
+character_height = 8
+
+x = (screen_width-character_width)//2
+y = (screen_height-character_height)//2
+
+increment = 1
+sleep_time = 1
+
+while True:
+    
+    number = 1
+
+    for i in range(9):  
+        oled.fill(0)
+        oled.text(str(number), x,y)
+        oled.show()
+        number += 1
+        sleep(sleep_time)
+        
+    for i in range(10, 61):  
+        oled.fill(0)
+        oled.text(str(number), x-character_width//2,y)
+        oled.show()
+        number += 1
+        sleep(sleep_time)
+                    </code></pre>
+                <h2>Encoder with the Screen</h2>
+                    <p>Before moving into controlling the servo motor, I wanted to write a test code for the encoder and the screen. I thought that this would be the easiest task by far, since I just had to add the two previously written codes together, but boy was I wrong. When I implemented the two codes together, I noticed some problems with the encoder movement that had been there all along, but amplified themselves with the new screen setup. The encoder was behaving quite unreliably, as for example, it was skipping values depending on the rotation speed. This sent me to deep rabbit hole of investigating screen update frequencies, main loop’s update frequency, esp32’s firmware updates, trying out Arduino IDE and returning back to MicroPython – just to name few steps. I’m still quite quite overwhelmed by all of the information when writing this text, but as I understood, the jumpy behaviour of the rotary movement is normal behaviour for the encoder due to its construction. This behaviour can be corrected with code, though, and I managed to find a RotaryIRQ MicroPython library that helped a lot with the unreliability issues. I decided to rewrite my encoder test code using the library and added the OLED screen monitoring to the code. This code updates the screen only when the encoder value is updated, which was crucial for getting smooth response out of the setup. Other crucial parts were the screen update frequency, main loop’s update frequency and setting up pull-up resistors and half_step mode in the RotaryIRQ’s setup.</p>
+                    <pre><code>
+# Test code for XIAO ESP32-C3, rotary encoder and SSD1306 OLED screen using miketeachman's RotaryIRQ library.
+# RotaryIRQ library: https://github.com/miketeachman/micropython-rotary
+
+import time
+from rotary_irq_esp import RotaryIRQ
+from machine import Pin, I2C
+from ssd1306 import SSD1306_I2C
+
+# OLED SETUP
+
+i2c = I2C(0, scl=Pin(7), sda=Pin(6), freq=400000)
+oled = SSD1306_I2C(128, 64, i2c)
+
+# ENCODER SETUP
+
+r = RotaryIRQ(pin_num_clk=2, 
+              pin_num_dt=3,
+              incr=1,
+              pull_up=True,
+              half_step=True,
+              reverse=True,
+              range_mode=RotaryIRQ.RANGE_UNBOUNDED)
+              
+val_old = r.value()
+
+#BUTTON SETUP
+
+btn = Pin(4, Pin.IN, Pin.PULL_UP)
+
+#MAIN LOOP
+
+while True:
+    val_new = r.value()
+    
+    #Encoder movement
+    if val_old != val_new:
+        val_old = val_new
+        oled.fill(0)
+        oled.text(str(val_new), 0, 0)
+        oled.show()
+        #print("Value:", val_new)
+        
+    #Button press
+    if btn.value() == 0:
+        r.set(0)
+              
+    time.sleep_ms(2)
+                    </code></pre>
+                <h2>The Servo Motor</h2>
+                    <p>As a second output device, I used a DF Robot DF9GMS 180 degree servo. As wiring and configuring the encoder and screen were my main focus with the assignment, I decided to take a simplified approach with the motor. Usually, it is recommended to use an external power source – and in some cases, a level shifter – with servos, but I was able to run the DF9GMS straight from the ESP32’s 5V VCC without level shifting the 3.3V control voltage. This setup is not recommended, though, as the motor model, its working load and the number of used motors change the situation drastically. I wanted to approach the subject with baby steps, though, since I didn’t have any prior experience with them. Next time I’m wiring up a servo, I’m definitely going to use the recommended wiring, since it makes the setup more safe, reliable and universal.</p>
+                    <p>Before implementing the servo to the final code, I wrote a test code for it. Servos are controlled with pulse-width modulation (PWM) signals, which define the angle of the motor. The PWM signal length is usually in microseconds, so some math was needed to calculate the angle. There are some libraries that makes have the conversion built-in along with some other functionalities, but I wasn’t able to find one for MicroPython. As I’m still in the very early stage in learning MicroPython (or Python in general), I had to ask Copilot to write me the library. For my test code’s purposes, the library is actually really minimal, and basically consists of one class.</p>
+                    <pre><code>
+#Servo.py for DF9GMS
+
+from machine import Pin, PWM
+
+class Servo:
+    def __init__(self, pin, min_us=500, max_us=2500, freq=50):
+        self.pwm = PWM(Pin(pin))
+        self.pwm.freq(freq)
+        self.min_us = min_us
+        self.max_us = max_us
+
+    def angle(self, degrees):
+        degrees = max(0, min(180, degrees))
+        pulse = self.min_us + (degrees / 180) * (self.max_us - self.min_us)
+        duty = int((pulse / 20000) * 65535)
+        self.pwm.duty_u16(duty)
+                    </code></pre>
+                    <p>I could, of course, implement the class straight to my code, but for this assignment, I preferred to have it as an external to keep the main code more easy to read. I wrote a simple test loop, which changes the angle of the servo between 0, 90 and 180 degrees.</p>
+                    <pre><code>
+#Servo test code
+                    </code></pre>
+                <h2>Putting It All Together</h2>
+                    <p>As the final endeavour, I wanted to use all the devices together. I wanted to have a code, which would let me control the angle of the servo motor with the encoder and output the current angle on the OLED screen. I used my prior code made for the encoder and screen as a basis, and added a servo angle control to the main loop. I then limited the encoder range to use values from 0-180. These tweaks got me almost there, but I still had some flickering of numbers when I tried to rotate over 180 or under 0. I made sure to put the encoder range limit code block before updating the current value calculation, which eliminated the problem. At this point, I was happy that I had approached the assignment in small blocks and figured out most of the problems along the way, since that made putting up the final code so much easier.</p>
+                    <pre><code>
+# Test code for XIAO ESP32-C3, rotary encoder, SSD1306 OLED screen and DF9GMS servo motor.
+# RotaryIRQ library: https://github.com/miketeachman/micropython-rotary
+
+import time
+from rotary_irq_esp import RotaryIRQ
+from machine import Pin, I2C
+from ssd1306 import SSD1306_I2C
+from servo import Servo
+
+# OLED SETUP
+
+i2c = I2C(0, scl=Pin(7), sda=Pin(6), freq=400000)
+oled = SSD1306_I2C(128, 64, i2c)
+
+# ENCODER SETUP
+
+r = RotaryIRQ(pin_num_clk=2, 
+              pin_num_dt=3,
+              incr=2,
+              pull_up=True,
+              half_step=True,
+              reverse=True,
+              range_mode=RotaryIRQ.RANGE_UNBOUNDED)
+              
+val_old = r.value()
+
+MIN_VAL = 0
+MAX_VAL = 180
+
+#BUTTON SETUP
+
+btn = Pin(4, Pin.IN, Pin.PULL_UP)
+
+#SERVO SETUP
+
+servo = Servo(5)
+
+#MAIN LOOP
+
+while True:
+    val_new = r.value()
+    
+    #Encoder range limit
+    if val_new < MIN_VAL:
+        r.set(MIN_VAL)
+        val_new = MIN_VAL
+
+    elif val_new > MAX_VAL:
+        r.set(MAX_VAL)
+        val_new = MAX_VAL
+
+    #Encoder movement
+    if val_old != val_new:
+        val_old = val_new
+        oled.fill(0)
+        oled.text(str(val_new), 0, 0)
+        oled.show()
+        servo.angle(val_new)
+        #print("Value:", val_new)
+        
+    #Button press
+    if btn.value() == 0:
+        r.set(0)
+              
+    time.sleep_ms(2)
+                    </code></pre>
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
+    </div>
+</body>
+</html>

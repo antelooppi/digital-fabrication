@@ -106,13 +106,17 @@ aside {
     margin-bottom: 50px;
     line-height: 25px;
     font-size: 16px;
-    background-color: #eeeeee;
+    background: #f5f5f5;
     padding: 25px;
 }
 
-aside h3 {
-    
+pre {
+    margin-top: 25px;    
+    margin-bottom: 25px;
+    padding: 1rem; 
+    background: #f5f5f5;
 }
+
 
 .assignments-list {
     list-style-type: none;
@@ -151,13 +155,13 @@ footer {
     height: 16px;
     }
     .navbar ul {
-        padding-left: 0;
+        padding-left: 10px;
     }
-    header {
+    /* header {
         text-align: center;
         justify-content: center;
         align-items: center;
-    }
+    } */
 }
 
 /* Tablets (over 768px) */
