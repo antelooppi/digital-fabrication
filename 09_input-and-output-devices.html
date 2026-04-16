@@ -175,6 +175,10 @@ while True:
                     </figure>
                 <h2>The Servo Motor</h2>
                     <p>As a second output device, I used a DF Robot DF9GMS 180 degree servo. As wiring and configuring the encoder and screen were my main focus with the assignment, I decided to take a simplified approach with the motor. Usually, it is recommended to use an external power source – and in some cases, a level shifter – with servos, but I was able to run the DF9GMS straight from the ESP32’s 5V VCC without level shifting the 3.3V control voltage. This setup is not recommended, though, as the motor model, its working load and the number of used motors change the situation drastically. I wanted to approach the subject with baby steps, though, since I didn’t have any prior experience with them. Next time I’m wiring up a servo, I’m definitely going to use the recommended wiring, since it makes the setup more safe, reliable and universal.</p>
+                    <figure>
+                        <img src="Media/09 Input and Output Devices/servo schematic.jpg" alt="The schematics of the servo motor.">
+                        <figcaption>The schematics of the servo motor.</figcaption>
+                    </figure
                     <p>Before implementing the servo to the final code, I wrote a test code for it. Servos are controlled with pulse-width modulation (PWM) signals, which define the angle of the motor. The PWM signal length is usually in microseconds, so some math was needed to calculate the angle. There are some libraries that makes have the conversion built-in along with some other functionalities, but I wasn’t able to find one for MicroPython. As I’m still in the very early stage in learning MicroPython (or Python in general), I had to ask Copilot to write me the library. For my test code’s purposes, the library is actually really minimal, and basically consists of one class.</p>
                     <pre><code>
 #Servo.py for DF9GMS
