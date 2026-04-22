@@ -23,18 +23,18 @@
         <main>
             <h1>Assignment 09: Input and Output Devices</h1>
                 <h2>My Design</h2>
-                    <p>For this week’s assignment, I fabricated a simple PCB test board for connecting different input and output devices. I wanted to create a simple one-knob interface, which would control a servo motor and output its value on integrated screen. I built my design around Seeed Studio ESP32-C3 MCU, using an encoder as an input, and an I2C OLED screen with DF9GMS servo motor as an output. I also included a Qwiic connector for swapping different I2C modules. I designed the PCB in KiCad and milled it using the Roland SRM-20. Here are the schematic of the board:</p>
+                    <p>For this week’s assignment, I designed and fabricated a PCB test board for connecting different input and output devices. I wanted to create a simple one-knob interface, which would control a servo motor and output its value on integrated screen. I built my design around Seeed Studio ESP32-C3 MCU, using an encoder as an input, and an I2C OLED screen with DF9GMS servo motor as an output. I also included a Qwiic connector for swapping different I2C modules. I designed the PCB in KiCad and milled it using the Roland SRM-20. Here is the assembled board alongside the chosen input and output devices.</p>
                     <figure>
-                        <img src="Media/09 Input and Output Devices/devices.jpg" alt="A picture of a servo motor, an encoder and an oled screen.">
-                        <figcaption>The input and output devices chosen for the assignment.</figcaption>
+                        <img src="Media/09 Input and Output Devices/devices2.jpg" alt="A picture of the finished pcb board alongside with a servo motor, an encoder and an oled screen.">
+                        <figcaption>The finished board alongside the chosen input and output devices.</figcaption>
                     </figure>
-                <h2>Testing the Encoder</h2>
-                    <p>The encoder is attached to the board using surface-mounted pin slots. I used a five-pin rotary encoder, which has an integrated push-button function. The two outer pins on the three-legged side are connected to ESP32’s GPIO pins two and three. This side reads the rotary movement of the encoder. The second pin on the two-legged side is connected to GPIO pin four. This side is reading the push-button state. The remaining two pins are connected to the ground.</p>
+                <h2>Setting Up the Encoder</h2>
+                    <p>The encoder is attached to the board using surface-mount pin slots. I used a five-pin rotary encoder, which has an integrated push-button function. The two outer pins of the three-legged side are connected to ESP32’s GPIO pins two and three. This side reads the rotary movement of the encoder. The second pin on the two-legged side is connected to GPIO pin four. This side is reading the push-button state. The remaining two pins are connected to the ground.</p>
                     <figure>
                         <img src="Media/09 Input and Output Devices/encoder schematic.jpg" alt="The encoder schematics.">
                         <figcaption>The encoder schematics.</figcaption>
                     </figure>
-                    <p>I wrote a simple MicroPython test code for the encoder, which increases or decreases the number depending on the direction of the rotary movement and prints it in real time into Thonny’s shell. The push-button resets the number to 0. Here is the test code:</p>
+                    <p>I wrote a simple MicroPython test code for the encoder, which increases or decreases the number count depending on the direction of the rotary movement and prints it in real time into Thonny’s shell. The push-button resets the number to 0. Here is the test code:</p>
                     <pre><code>
 # Encoder test code
 
@@ -76,12 +76,13 @@ while True:
                         <video src="Media/09 Input and Output Devices/encoder.mp4" controls loop muted></video>
                         <figcaption>The encoder test code in action. The outputted of the encoder is outputting its values into Thonny's shell.</figcaption>
                     </figure>
-                <h2>Testing the OLED Screen</h2>
-                    <p>I wanted to add a real-time monitoring possibility for standalone operation, so I implemented a small OLED screen to the board. The screen is connected to the board using surface-mount pin sockets, and it uses the I2C protocol for communication. The I2C protocol enables chaining multiple devices together in a serial-communication bus, and consists of only two signals: Serial Clock (SCL) and Serial Data (SDA). The OLED screen needs also power, so the 3.3V and ground are also needed.</p>
+                <h2>Setting Up the OLED Screen</h2>
+                    <p>I wanted to add a real-time monitoring possibility for standalone operation, so I implemented a small OLED screen to the board. The screen is connected using surface-mount pin sockets, and it uses the I2C protocol for communication. The I2C protocol enables chaining multiple devices together in a serial-communication bus, and consists of only two signals: Serial Clock (SCL) and Serial Data (SDA). The OLED screen needs also power, so the 3.3V and ground are also needed.</p>
                     <figure>
                         <img src="Media/09 Input and Output Devices/oled schematic.jpg" alt="">
                         <figcaption>OLED schematics.</figcaption>
                     </figure>
+                    <p>I wrote a test code for the OLED screen, which loops down the numbers from 10 to 0. The code also positions the output in the middle of the screen by calculating the x position for each number depending on the string length.</p>
                     <pre><code>
 #OLED test counter
 
@@ -119,8 +120,9 @@ while True:
                         <video src="Media/09 Input and Output Devices/oled.mp4" controls loop muted></video>
                         <figcaption>Oled test counter in action.</figcaption>
                     </figure>
-                <h2>Encoder with the Screen</h2>
-                    <p>Before moving into controlling the servo motor, I wanted to write a test code for the encoder and the screen. I thought that this would be the easiest task by far, since I just had to add the two previously written codes together, but boy was I wrong. When I implemented the two codes together, I noticed some problems with the encoder movement that had been there all along, but amplified themselves with the new screen setup. The encoder was behaving quite unreliably, as for example, it was skipping values depending on the rotation speed. This sent me to deep rabbit hole of investigating screen update frequencies, main loop’s update frequency, esp32’s firmware updates, trying out Arduino IDE and returning back to MicroPython – just to name few steps. I’m still quite quite overwhelmed by all of the information when writing this text, but as I understood, the jumpy behaviour of the rotary movement is normal behaviour for the encoder due to its construction. This behaviour can be corrected with code, though, and I managed to find a RotaryIRQ MicroPython library that helped a lot with the unreliability issues. I decided to rewrite my encoder test code using the library and added the OLED screen monitoring to the code. This code updates the screen only when the encoder value is updated, which was crucial for getting smooth response out of the setup. Other crucial parts were the screen update frequency, main loop’s update frequency and setting up pull-up resistors and half_step mode in the RotaryIRQ’s setup.</p>
+                <h2>Setting Up the Encoder with the Screen</h2>
+                    <p>Before moving into controlling the servo motor, I wanted to write a test code for the encoder and the screen. I thought this would be an easy task, since I just had to add the two previously written codes together, but boy was I wrong. When I implemented the two codes together, I noticed some problems with the encoder movement which had already existed, but amplified themselves with the new screen implementation. When testing the encoder and screen together, the encoder was behaving quite unreliably. For example, it was skipping values depending on the rotation speed. This sent me to a deep rabbit hole of investigating screen update frequencies, main loop’s update frequency, esp32’s firmware updates, and changing the platform to Arduino IDE – just to name a few steps. After banging my head against the wall for many hours, I decided to return back to MicroPython and managed to fine-tune the encoder behaviour.</p>
+                    <p>If I have understood correctly, the jumpy behaviour of the rotary movement is normal behaviour for the encoder due to its construction. This behaviour can be corrected with code, and I managed to find a RotaryIRQ MicroPython library that helped a lot with the unreliability issues. After learning this, I decided to rewrite my encoder test code from the ground up using the library, and added the OLED screen monitoring capability to the code. This code updates the screen only when the encoder value is updated, which was crucial for getting a smooth response out of the setup. Other crucial parts were the screen update frequency, main loop’s update frequency and setting up pull-up resistors and half_step mode in the RotaryIRQ’s setup phase.</p>
                     <pre><code>
 # Test code for XIAO ESP32-C3, rotary encoder and SSD1306 OLED screen using miketeachman's RotaryIRQ library.
 # RotaryIRQ library: https://github.com/miketeachman/micropython-rotary
@@ -173,13 +175,13 @@ while True:
                         <video src="Media/09 Input and Output Devices/encoder oled.mp4" controls loop muted></video>
                         <figcaption>Oled screen outputting encoder's values.</figcaption>
                     </figure>
-                <h2>The Servo Motor</h2>
-                    <p>As a second output device, I used a DF Robot DF9GMS 180 degree servo. As wiring and configuring the encoder and screen were my main focus with the assignment, I decided to take a simplified approach with the motor. Usually, it is recommended to use an external power source – and in some cases, a level shifter – with servos, but I was able to run the DF9GMS straight from the ESP32’s 5V VCC without level shifting the 3.3V control voltage. This setup is not recommended, though, as the motor model, its working load and the number of used motors change the situation drastically. I wanted to approach the subject with baby steps, though, since I didn’t have any prior experience with them. Next time I’m wiring up a servo, I’m definitely going to use the recommended wiring, since it makes the setup more safe, reliable and universal.</p>
+                <h2>Setting Up the Servo Motor</h2>
+                    <p>After successfully setting up the encoder and the screen, I was ready to move on controlling the servo motor. For this assignment, I used a DF Robot DF9GMS 180 degree servo. Since I didn’t have any prior experience with controlling motors, I decided to take a simplified approach with the servo. Usually, it is recommended to use an external power source – and in some cases, a level shifter – with servos, but I was able to run the DF9GMS straight from the ESP32’s 5V VCC without shifting the level of the 3.3V control voltage. This setup is not recommended, though, as the motor’s model, its working load and the number of used motors can change the situation drastically. I wanted to approach the subject with baby steps, though, since my main focus was on getting the encoder and screen working. The next time I’m wiring up a servo, I’m definitely going to use the recommended wiring, since that makes the setup more safe, reliable and universal.</p>
                     <figure>
                         <img src="Media/09 Input and Output Devices/servo schematic.jpg" alt="The schematics of the servo motor.">
                         <figcaption>The schematics of the servo motor.</figcaption>
                     </figure
-                    <p>Before implementing the servo to the final code, I wrote a test code for it. Servos are controlled with pulse-width modulation (PWM) signals, which define the angle of the motor. The PWM signal length is usually in microseconds, so some math was needed to calculate the angle. There are some libraries that makes have the conversion built-in along with some other functionalities, but I wasn’t able to find one for MicroPython. As I’m still in the very early stage in learning MicroPython (or Python in general), I had to ask Copilot to write me the library. For my test code’s purposes, the library is actually really minimal, and basically consists of one class.</p>
+                    <p>Before implementing the servo to the final code, I wrote a test code for it. Servos are controlled with pulse-width modulation (PWM) signals, which define the angle of the motor. The PWM signal length is usually in microseconds, so some math was needed for calculating the angle. There are some libraries that have the conversion built-in (alongside some other functionalities), but I wasn’t able to find one for MicroPython. As I’m still in the early stage in learning MicroPython, I had to ask Copilot to write me the library. For my test code’s purposes, the library is actually really minimal, and basically consists of one class:</p>
                     <pre><code>
 #Servo.py for DF9GMS
 
@@ -198,7 +200,7 @@ class Servo:
         duty = int((pulse / 20000) * 65535)
         self.pwm.duty_u16(duty)
                     </code></pre>
-                    <p>I could, of course, implement the class straight to my code, but for this assignment, I preferred to have it as an external to keep the main code more easy to read. I wrote a simple test loop, which changes the angle of the servo between 0, 90 and 180 degrees.</p>
+                    <p>I could, of course, implement this class straight to my code, but I preferred to have it as an external to keep the main code more readable. After saving the library, I wrote a simple test code, which changes servo’s angle between 0, 90 and 180 degrees.</p>
                     <pre><code>
 #Servo test code
 
@@ -224,7 +226,7 @@ while True:
                         <figcaption>Servo test code in action.</figcaption>
                     </figure>
                 <h2>Putting It All Together</h2>
-                    <p>As the final endeavour, I wanted to use all the devices together. I wanted to have a code, which would let me control the angle of the servo motor with the encoder and output the current angle on the OLED screen. I used my prior code made for the encoder and screen as a basis, and added a servo angle control to the main loop. I then limited the encoder range to use values from 0-180. These tweaks got me almost there, but I still had some flickering of numbers when I tried to rotate over 180 or under 0. I made sure to put the encoder range limit code block before updating the current value calculation, which eliminated the problem. At this point, I was happy that I had approached the assignment in small blocks and figured out most of the problems along the way, since that made putting up the final code so much easier.</p>
+                    <p>As the final endeavour, I wanted to use all three devices together. I wanted to have a setup, which would let me control the angle of the servo with the encoder and output the current angle on the OLED screen. I used the code made for the encoder and screen as a basis, and added a servo angle control to the main loop. I then limited the encoder’s range to values between 0 and 180. These tweaks got almost the result I wanted, minus some flickering when reaching over or under the number limitations. I was able to fix this by placing the encoder range limit code block before updating the current value calculation. After the flickering was gone, I was happy with the end result, as both the screen and the servo reacted smoothly to the encoder movement. At this point, I was grateful I had approached the assignment in small blocks and wrote test codes for each device. This made setting up the final implementation so much easier, since I had already figured out the main problems as individual tasks – not as pile of unsolvable mess.</p>
                     <pre><code>
 # Test code for XIAO ESP32-C3, rotary encoder, SSD1306 OLED screen and DF9GMS servo motor.
 # RotaryIRQ library: https://github.com/miketeachman/micropython-rotary
