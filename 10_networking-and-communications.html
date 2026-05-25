@@ -34,13 +34,13 @@
                 <h2>Sending Data to the Board</h2>
                     <p>To test sending data to the board, I wanted to control the servo motor angle wirelessly with the browser. I asked Aalto AI to expand the previous code written by adding a HTML page with the angle adjustment interface. This value gets send to the ESP32, which changes the angle accordingly. I also asked AI to add the angle value to the OLED screen for better readability. To make the connection process easier, I asked it to add code blocks for AP fallback (if STA isn’t working), clean interface reset before connecting, and bunch of other refinements I don’t fully understand. With these changes, I was able to run the board both standalone and with computer’s usb port without constantly having to change the code or restart the board.</p>
                     <figure>
-                        <video src="Media/10 Networking and Communications/servo.mp4" controls loop></video>
+                        <video src="Media/10 Networking and Communications/servo.mp4" controls loop muted></video>
                         <figcaption>The servo test code in action. The HTML interface is controlling the board wirelessly. The board is in standalone mode and is powered with 5V USB power supply.</figcaption>
                     </figure>
                 <h2>Receiving Data from the Board</h2>
                     <p>To receive data from the board, I modified the previous code by removing the servo-related functionalities and added encoder reading capabilities. I asked AI to use <a href="09_input-and-output-devices.html">the encoder test code with rotaryirq library</a> I had written for previous assignment as the basis, since I had already solved most of the encoder-related challenges when writing that code. I wanted to be able to read the encoder’s current value with the browser, so I asked AI to do the implementation. I could have achieved the value update in couple of ways: manual or automatic. I decided to do the manual version, since the automatic page update would have required some javascript coding. In the final implementation, the HTML page gets the encoder reading every time the user hits the refresh button.</p>
                      <figure>
-                        <video src="Media/10 Networking and Communications/encoder.mp4" controls loop></video>
+                        <video src="Media/10 Networking and Communications/encoder.mp4" controls loop muted></video>
                         <figcaption>The encoder test code in action. The HTML page updates the current encoder value every time the user hits refresh. The board is in standalone mode and is powered with 5V USB power supply.</figcaption>
                     </figure>
         </main>
