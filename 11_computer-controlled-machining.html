@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Fabrication Course Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="Media/00/logo.png"alt="logo">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Assignment 11: Computer-Controlled Machining</h1>
+                <h2>Introduction</h2>
+                    <p>This week I designed and fabricated a stool using Recontech 1312 CNC milling machine. I used FreeCAD to make a three-piece parametric design, and 14.7mm thick sheet of plywood to cut the individual pieces for it. The final stool consists of three parts – the top and two legs - which interlocks to each other using finger joints and pockets. The design is based on our teacher Kris’ Fablab bench design, which I modified to my own taste. The stool is put together using only tightly-fitted joints and pockets, so no glue or any other enhancement was needed.</p>
+                <h2>Designing the Stool in FreeCAD</h2>
+                    <p>I started the design process by defining the variables for stool height, top diameter and material thickness inside FreeCAD’s spreadsheet. I used these three variables in different mathematical forms for all the dimensions. I started the drawing process by making an initial shape for the leg without any joints or slots. I then copied the base twice to make the individual leg designs. I added identical top joints to both of them, and mirror-imaged slots in the middle for interlocking the legs together in 90 degree angle. I then added the top part, to which I cut pockets for the legs using boolean operation. After refining the design and its dimensions (including measuring the material thickness), I exported the SVG file using FreeCAD’s Techdraw workbench and processed the file with Inkscape, similar to the <a href="04_computer-controlled-cutting.html">laser cutting process</a>.</p>
+                <h2>Cutting the Material</h2>
+                    <p>I used 120x120cm plywood with 14.7mm thickness for cutting the parts for the stool. I started by securing the material to the sacrificial layer using composite nails. The sacrificial layer should usually be porous enough to lock the material to it using only the machine’s vacuum. We couldn’t manage to get enough pressure from it, so I used composite nails in conjunction with clamps to attach the sacrificial layer and the plywood to the machine bed securely.</p>
+                    <p>After securing the materials to the machine bed, I installed the cutter and calibrated its Z axis using an integrated calibration tool, which calculates the z origin automatically when the cutter touches it. I then set the X and Y origins using Mach3 CNC program and imported my design file into VCarve Pro. In VCarve, I defined some basic job setups - like job size, job type, Z zero position and XY datum position – as well as dogbone fillets and pocket setups. In the same program, I also set spindle speed, feed rate and plunge rate. Finally, I added some tabs to the job to keep the parts in place during the milling, exported the toolpaths to Mach3, and executed the cutting job.</p>
+                    <h2>Cleaning Up the Parts</h2>
+                        <p>After the CNC job was done, the individual parts were still attached to the plywood sheet by the tabs that held them in place during the milling. I used Makita handheld power tool with cutter bit for separating the individual parts from the sheet. I then used a saw and a power sander to remove the remaining tabs from the stool parts. Finally, I used regular sandpaper with good-old elbow-grease to smoothen all the rough edges and to make the overall impression nicer. To my delight, all the pockets and joints fitted together tightly, so I didn’t need to use glue or any other enhancement to put the stool together. Attaching the top part to the legs needed a little bit of love with the gavel due to the tight fit, but after that, the stool was assembled and could already bare sitting-weight.</p>
+                    <h2>Learning Outcomes</h2>
+                        <p>With this assignment, I learned the basics of 3-axis CNC machining. To be honest, I think I need to go through the process at least couple of times by myself to actually start to using it effectively in my future designs. With the stool-making process, I learned that it’s vital to fine-tune all the dimension-related parameters – especially if making something with interlocking joinery. This doesn’t only mean making a parametric design in FreeCAD, but also setting things up carefully in the machining state. Luckily, I had some competent assistance to guide me through the process successfully, but I can also imagine a totally different end result, if setting up the tool paths willy-nilly. </p>
+                    <h2>Attachments</h2>
+                        <p><a href="Media/11 Computer-Controlled Machining/Stool.zip">Download the FreeCAD file(s)</a></p>
+
+        </main>
+        <footer>© 2026 Antero Huttunen. All Rights Reserved.</footer>
+    </div>
+</body>
+</html>
